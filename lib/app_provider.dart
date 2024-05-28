@@ -22,8 +22,8 @@ class AppProvider extends ChangeNotifier {
 
   ThemeData get themeData => _theme;
 
-  void changeTheme() {
-    if(_theme == lightTheme) {
+  void changeTheme(bool isDarkMode) {
+    if(isDarkMode) {
       _theme = darkTheme;
     } else {
       _theme = lightTheme;

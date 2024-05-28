@@ -10,19 +10,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool switchState = false;
+  bool isDarkMode = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
           Switch(
-            value: switchState,
+            value: isDarkMode,
             onChanged: (bool value) {
-              setState(() {
-                switchState = !switchState;
-              });
-              context.read<AppProvider>().changeTheme();
+              switchTheme();
             },
           )
         ],
@@ -68,7 +65,7 @@ class _HomeState extends State<Home> {
                       backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
                   onPressed: () => {
-                    context.read<AppProvider>().changeTheme()
+                    switchTheme()
                   },
                   child: Text(
                     style: TextStyle(
@@ -82,5 +79,12 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  void switchTheme() {
+    setState(() {
+      isDarkMode = !isDarkMode;
+    });
+    context.read<AppProvider>().changeTheme(isDarkMode);
   }
 }
